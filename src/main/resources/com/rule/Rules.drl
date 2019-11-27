@@ -1,0 +1,38 @@
+package com.rule
+
+import com.inteligentes.model.Prestamo
+
+rule "Regla 1"
+	when
+		$prestamo: Prestamo(rentabilidad>80 && tir>80 && mercado>80 && capital>80 && crecimiento>80 && patrimonio>80 && riesgo>80 && ingresos>80 && gastos>80)
+	then
+	    System.out.println("Prestamo Pre Aprobado al 100 %");
+		$prestamo.setPorcentaje(100);
+	end
+	
+	
+rule "Regla 2"
+	when
+		$prestamo: Prestamo(rentabilidad > 70 && capital >60 && capital <80)
+	then
+	    System.out.println("Prestamo Pre Aprobado al 70 %");
+		$prestamo.setPorcentaje(70);
+	end
+	
+	
+rule "Regla 3"
+	when
+		$prestamo: Prestamo(crecimiento>70 || mercado>60 && patrimonio>50)
+	then
+	    System.out.println("Prestamo Pre Aprobado al 80 %");
+		$prestamo.setPorcentaje(80);
+	end
+	
+	
+rule "Regla 4"
+	when
+		$prestamo: Prestamo(tir<40 && riesgo<50)
+	then
+	    System.out.println("Prestamo Pre Aprobado al 0 %");
+		$prestamo.setPorcentaje(0);
+	end
